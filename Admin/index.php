@@ -1,4 +1,8 @@
-﻿<?php include 'inc/head.php' ?>
+﻿<?php 
+// if(isset())
+?>
+
+<?php include 'inc/head.php' ?>
 
 <!-- Page Loader -->
 <?php include 'inc/page-loader.php' ?>
