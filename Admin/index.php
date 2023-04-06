@@ -1,5 +1,16 @@
 ﻿<?php 
-// if(isset())
+include "config/connection.php";
+if(isset($_SESSION['admin']['user_name'])){
+    $email = base64_decode($_SESSION['admin']['user_name']);
+    $query = 'SELECT * FROM users where user_email = "$email"';
+
+    $result = mysqli_query($conn,$query);
+    if($result){
+        $user_data = mysqli_fetch_assoc($result);
+    }
+} else{
+    header('location: sign-in.php');
+}
 ?>
 
 <?php include 'inc/head.php' ?>

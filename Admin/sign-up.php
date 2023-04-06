@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -45,7 +44,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="namesurname" placeholder="Name Surname" required autofocus>
+                            <input type="text" class="form-control" name="namesurname" placeholder="Fullname" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -55,6 +54,18 @@
                         <div class="form-line">
                             <input type="email" class="form-control" name="email" placeholder="Email Address" required>
                         </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">phone</i>
+                        </span>
+                        <div class="form-line" id ="phoneDiv">
+                            <input type="tel" class="form-control" name="phone[]" placeholder="Phone Number" required>
+                            <div id = 'phoneContainer'></div>
+                        </div>
+                        <button type="button" class='btn btn-default btn-circle waves-effect waves-circle waves-float' id="addPhone">
+                            <i class="material-icons">add</i>
+                        </button>
                     </div>
 
                     <div class="input-group">
@@ -98,7 +109,7 @@
                         <label for="terms">I read and agree to the <a href="javascript:void(0);">terms of usage</a>.</label>
                     </div>
 
-                    <input id ='signupBtn' class="btn btn-block btn-lg bg-pink waves-effect" type="submit" name="submit1" Value = "SIGN UP">
+                    <input id='signupBtn' class="btn btn-block btn-lg bg-pink waves-effect" type="submit" name="submit1" Value="SIGN UP">
 
                     <div class="m-t-25 m-b--5 align-center">
                         <a href="sign-in.php">You already have a membership?</a>

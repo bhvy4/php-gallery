@@ -22,8 +22,8 @@
     <!-- Animation Css -->
     <link href="plugins/animate-css/animate.css" rel="stylesheet" />
 
-    <!-- Morris Chart Css-->
-    <link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+    <!-- Sweet Alert Css -->
+    <link href="plugins/sweetalert/sweetalert.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="css/style.css" rel="stylesheet">
@@ -31,8 +31,10 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
-    <!-- Light Gallery Plugin Css -->
-    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <!-- Bootstrap DatePicker Css -->
+    <link href="plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
 </head>
 
 <body class="theme-red">

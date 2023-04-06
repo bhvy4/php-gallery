@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href=plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Waves Effect Css -->
     <link href="plugins/node-waves/waves.css" rel="stylesheet" />
@@ -33,8 +33,9 @@
         </div>
         <div class="card">
             <div class="body">
-                <form id="sign_in" method="POST">
+                <form id="sign_in" enctype="multipart/form-data">
                     <div class="msg">Sign in to start your session</div>
+                    <div id="alert-msg"></div>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
