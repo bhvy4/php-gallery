@@ -17,6 +17,7 @@ $result = mysqli_query($conn, $sql);
                     <h2>
                         All Contests
                     </h2>
+                    <div id="alert-message"></div>
                 </div>
                 <div class="body">
                     <table id="mainTable" class="table table-striped">
@@ -26,6 +27,7 @@ $result = mysqli_query($conn, $sql);
                                 <th>Name</th>
                                 <th>Deadline</th>
                                 <th>Image</th>
+                                <th>Category</th>
                                 <th>Author</th>
                                 <th>Prize</th>
                                 <th>Winner </th>
@@ -38,11 +40,12 @@ $result = mysqli_query($conn, $sql);
                                 <tr id="<?= htmlspecialchars($data['contest_id']) ?>">
                                     <td><?= htmlspecialchars($data['contest_id']) ?></td>
                                     <td><?= htmlspecialchars($data['contest_name']) ?></td>
-                                    <td><?= htmlspecialchars($data['contest_deadline']) ?></td>
+                                    <td read-only><?= htmlspecialchars($data['contest_deadline']) ?></td>
                                     <td read-only>
                                         <img width='100' src="uploads/contest_profile_images/<?= htmlspecialchars($data['contest_image']) ?>" alt="">
                                         <input type="file" style="display: none;">
                                     </td>
+                                    <td read-only><?= htmlspecialchars($data['contest_category']) ?></td>
                                     <td><?= htmlspecialchars($data['contest_author']) ?></td>
                                     <td><?= htmlspecialchars($data['contest_prize']) ?></td>
                                     <td><?= htmlspecialchars($data['contest_winner']) ?></td>

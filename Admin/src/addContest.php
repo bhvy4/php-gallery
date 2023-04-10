@@ -10,6 +10,7 @@ $deadline = mysqli_real_escape_string($conn,$_POST['deadline']);
 $details = mysqli_real_escape_string($conn,$_POST['details']);
 $author = mysqli_real_escape_string($conn,$_POST['author']);
 $prize = mysqli_real_escape_string($conn,$_POST['contestPrice']);
+$category = mysqli_real_escape_string($conn,$_POST['category']);
 
 // echo $prize; die;
 $allowed_extensions = array(
@@ -34,7 +35,7 @@ if(!file_exists($_FILES['contest-image']['tmp_name'])){
 if(!array_filter($errors)){
     $image = uniqid('img_') . '.' . $extension;
     if(move_uploaded_file($_FILES['contest-image']['tmp_name'],$target_dir.$image)){
-        $sql = "INSERT INTO contests(contest_name,contest_deadline,contest_prize,contest_image,contest_author,contest_details) VALUES('$name','$deadline','$prize','$image','$author','$details')";
+        $sql = "INSERT INTO contests(contest_name,contest_deadline,contest_prize,contest_image,contest_category,contest_author,contest_details) VALUES('$name','$deadline','$prize','$image','$category','$author','$details')";
         if(mysqli_query($conn,$sql)) echo '<div class = "alert alert-success">Record inserted successfully!</div>';
     } else{
         echo 'Problem in uploading image';
@@ -46,6 +47,7 @@ if(!array_filter($errors)){
     }
 }
 
+mysqli_close($conn);
 
 
 
