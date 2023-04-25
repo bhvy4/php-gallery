@@ -7,6 +7,28 @@ $(() => {
     e.stopPropagation(); 
     
    })
+
+
+   $('.change-status').click(function(e){
+    let id = $(e.target).closest('tr').attr('id');
+    // console.log(id); return
+    let btn = $(this);
+    let status = btn.val();
+    // console.log(status); return;
+    $.ajax({
+        type:'post',
+        url: 'src/contestStatus.php',
+        data: {
+            id,
+            status
+        },
+        success: function(response){
+            console.log(response);
+            btn.val(response);
+            (response=='1')? btn.html('Completed') : btn.html('In Progress')
+        }
+    })
+   })
     
 
     $('#mainTable td').change((event) => {

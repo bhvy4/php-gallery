@@ -32,6 +32,7 @@ $result = mysqli_query($conn, $sql);
                                 <th>Prize</th>
                                 <th>Winner </th>
                                 <th>Details</th>
+                                <th>Status</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
@@ -51,7 +52,12 @@ $result = mysqli_query($conn, $sql);
                                     <td><?= htmlspecialchars($data['contest_winner']) ?></td>
                                     <td><?= htmlspecialchars($data['contest_details']) ?></td>
                                     <td read-only>
-                                        <a class="delete-contest btn bg-red waves-effect" >
+                                        <button type='button' class=" change-status btn bg-info waves-effect" value="<?= htmlspecialchars($data['contest_status']) ?>">
+                                            <?= ($data['contest_status']=='1') ? 'Completed': 'In Progress';?>
+                                        </button>
+                                    </td>
+                                    <td read-only>
+                                        <a class="delete-contest btn bg-red waves-effect">
                                             <i class="material-icons">delete</i>
                                         </a>
                                         <a class="edit-contest btn bg-green waves-effect">
@@ -77,5 +83,3 @@ $result = mysqli_query($conn, $sql);
 <script src="scripts/editContest.js"></script>
 <script src="scripts/deleteContest.js"></script>
 <script src="scripts/switchPages.js"></script>
-
-

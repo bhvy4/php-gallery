@@ -4,7 +4,7 @@ require "../config/connection.php";
 $name = $image = $deadline = $details = '';
 $errors = array('name'=>'','deadline'=>'', 'details'=>'', 'image'=>'');
 
-print_r($_POST);
+// print_r($_POST);
 $name = mysqli_real_escape_string($conn,$_POST['name']);
 $deadline = mysqli_real_escape_string($conn,$_POST['deadline']);
 $details = mysqli_real_escape_string($conn,$_POST['details']);

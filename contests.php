@@ -1,6 +1,13 @@
 <?php
+include 'Admin/config/connection.php';
  include 'include/head.php' ;
  include 'include/login-registration.php';
+
+ $sql = "SELECT * FROM contests WHERE contest_status = '0'";
+
+ $running_contests = mysqli_query($conn,$sql);
+
+
 ?>
 
   <div class="page-heading">
@@ -194,25 +201,27 @@
             <h4>Current <em>Contests</em> to Enter Now &amp; <em>Win</em></h4>
           </div>
         </div>
+        <?php while($row = mysqli_fetch_assoc($running_contests)) : ?>
         <div class="col-lg-3">
           <div class="contest-item">
             <div class="top-content">
               <span class="award">Award Price</span>
-              <span class="price">$1,200</span>
+              <span class="price">$<?=$row['contest_prize']?></span>
             </div>
-            <img src="assets/images/contest-01.jpg" alt="">
-            <h4>Walk In The Nature Night</h4>
+            <img src="Admin/uploads/contest_profile_images/<?=$row['contest_image']?>" alt="">
+            <h4><?=$row['contest_name']?></h4>
             <div class="info">
               <span class="participants"><img src="assets//images/icon-03.png" alt=""><br>80 Participants</span>
               <span class="submittions"><img src="assets//images/icon-01.png" alt=""><br>260 Submissions</span>
             </div>
             <div class="border-button">
-              <a href="contest-details.html">Browse Nature Pic Contests</a>
+                <a href="contest-details.php?id=<?=$row['contest_id']?>"> More Details</a>
             </div>
             <span class="info">* Client will pay via Online Payments</span>
           </div>
         </div>
-        <div class="col-lg-3">
+        <?php endwhile; ?>
+        <!-- <div class="col-lg-3">
           <div class="contest-item">
             <div class="top-content">
               <span class="award">Award Price</span>
@@ -225,7 +234,7 @@
               <span class="submittions"><img src="assets//images/icon-01.png" alt=""><br>212 Submissions</span>
             </div>
             <div class="border-button">
-              <a href="contest-details.html">Browse Nature Pic Contests</a>
+              <a href="contest-details.php">Browse Nature Pic Contests</a>
             </div>
             <span class="info">* Client will pay via Online Payments</span>
           </div>
@@ -243,7 +252,7 @@
               <span class="submittions"><img src="assets//images/icon-01.png" alt=""><br>150 Submissions</span>
             </div>
             <div class="border-button">
-              <a href="contest-details.html">Browse Nature Pic Contests</a>
+              <a href="contest-details.php">Browse Nature Pic Contests</a>
             </div>
             <span class="info">* Client will pay via Online Payments</span>
           </div>
@@ -261,11 +270,11 @@
               <span class="submittions"><img src="assets//images/icon-01.png" alt=""><br>120 Submissions</span>
             </div>
             <div class="border-button">
-              <a href="contest-details.html">Browse Nature Pic Contests</a>
+              <a href="contest-details.php">Browse Nature Pic Contests</a>
             </div>
             <span class="info">* Client will pay via Online Payments</span>
           </div>
-        </div>
+        </div> -->
         <div class="col-lg-12">
           <ul class="pagination">
             <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>

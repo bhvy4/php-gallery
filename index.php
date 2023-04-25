@@ -6,13 +6,23 @@ include 'include/login-registration.php';
 $result = mysqli_query($conn, "SELECT * FROM contests ORDER BY RAND() LIMIT 3");
 // $data = mysqli_fetch_assoc($result);
 
-$sql = "SELECT c.category_name AS category_name, COUNT(*) AS contest_count
+$sql = "SELECT c.category_name AS category_name, c.category_image, COUNT(*) AS contest_count
 FROM category c
 LEFT JOIN contests co ON c.category_name = co.contest_category
 GROUP BY c.category_id";
-$category_result = mysqli_query($conn,$sql);
-print_r($category_result);
+$category_result = mysqli_query($conn, $sql);
 
+$closed_contests = mysqli_query($conn, "SELECT * FROM contests WHERE contest_status ='1'");
+
+if (isset($_SESSION['user']['user_name'])) {
+  $user = base64_decode($_SESSION['user']['user_name']);
+  $query = 'SELECT * FROM users where user_name = "$user"';
+
+  $result = mysqli_query($conn, $query);
+  if ($result) {
+    $user_data = mysqli_fetch_assoc($result);
+  }
+}
 ?>
 
 
@@ -189,28 +199,30 @@ print_r($category_result);
           <a href="categories.php">Discover All Categories</a>
         </div>
       </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="popular-item">
-          <div class="top-content">
-            <div class="icon">
-              <img src="assets/images/icon-01.png" alt="">
+      <?php while ($row = mysqli_fetch_assoc($category_result)) : ?>
+        <div class="col-lg-3 col-sm-6">
+          <div class="popular-item">
+            <div class="top-content">
+              <div class="icon">
+                <img src="assets/images/icon-01.png" alt="">
+              </div>
+              <div class="right">
+                <h4><?= $row['category_name'] ?> Contest</h4>
+                <span><em><?= $row['contest_count'] ?></em> Available Contests</span>
+              </div>
             </div>
-            <div class="right">
-              <h4>Nature Pic Contest</h4>
-              <span><em>126</em> Available Contests</span>
+            <div class="thumb">
+              <img src="Admin/uploads/category_images/<?= $row['category_image'] ?>" alt="">
+              <span class="category">Top Contest</span>
+              <span class="likes"><i class="fa fa-heart"></i> 256</span>
             </div>
-          </div>
-          <div class="thumb">
-            <img src="assets/images/popular-01.png" alt="">
-            <span class="category">Top Contest</span>
-            <span class="likes"><i class="fa fa-heart"></i> 256</span>
-          </div>
-          <div class="border-button">
-            <a href="contest-details.php">Browse Nature Pic Contests</a>
+            <div class="border-button">
+              <a href="contest-details.php">Browse <?= $row['category_name'] ?> Contests</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
+      <?php endwhile; ?>
+      <!-- <div class="col-lg-3 col-sm-6">
         <div class="popular-item">
           <div class="top-content">
             <div class="icon">
@@ -272,7 +284,7 @@ print_r($category_result);
             <a href="contest-details.php">Browse Space Pic Contests</a>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -288,26 +300,28 @@ print_r($category_result);
       </div>
       <div class="col-lg-12">
         <div class="owl-features owl-carousel" style="position: relative; z-index: 5;">
-          <div class="item">
-            <div class="closed-item">
-              <div class="thumb">
-                <img src="assets/images/closed-01.jpg" alt="">
-                <span class="winner"><em>Winner:</em> Anthony Soft</span>
-                <span class="price"><em>Award :</em> $1,600</span>
-              </div>
-              <div class="down-content">
-                <div class="row">
-                  <div class="col-7">
-                    <h4>88 Participants <br><span>Number Of Artists</span></h4>
-                  </div>
-                  <div class="col-5">
-                    <h4 class="pics">320 Pictures <br><span>Submited Pics</span></h4>
+          <?php while ($row = mysqli_fetch_assoc($closed_contests)) : ?>
+            <div class="item">
+              <div class="closed-item">
+                <div class="thumb">
+                  <img src="Admin/uploads/contest_profile_images/<?= $row['contest_image'] ?>" alt="">
+                  <span class="winner"><em>Winner:</em> <?= $row['contest_winner'] ?></span>
+                  <span class="price"><em>Award :</em>$<?= $row['contest_prize'] ?></span>
+                </div>
+                <div class="down-content">
+                  <div class="row">
+                    <div class="col-7">
+                      <h4>88 Participants <br><span>Number Of Artists</span></h4>
+                    </div>
+                    <div class="col-5">
+                      <h4 class="pics">320 Pictures <br><span>Submited Pics</span></h4>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="item">
+          <?php endwhile; ?>
+          <!-- <div class="item">
             <div class="closed-item">
               <div class="thumb">
                 <img src="assets/images/closed-02.jpg" alt="">
@@ -344,7 +358,7 @@ print_r($category_result);
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-lg-12">
@@ -356,7 +370,7 @@ print_r($category_result);
   </div>
 </section>
 
-<section class="pricing-plans">
+<!-- <section class="pricing-plans">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -418,6 +432,6 @@ print_r($category_result);
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <?php include 'include/foot.php' ?>

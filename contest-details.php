@@ -1,13 +1,20 @@
 <?php
+ if(!isset($_GET['id'])) header('location: index.php');
+ include 'Admin/config/connection.php';
  include 'include/head.php' ;
  include 'include/login-registration.php';
+
+ $id = mysqli_real_escape_string($conn,$_GET['id']);
+ $sql = "SELECT * FROM contests WHERE contest_id = '$id'";
+ $contest = mysqli_query($conn,$sql);
+ $data = mysqli_fetch_assoc($contest);
 ?>
 
   <div class="page-heading">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2 header-text">
-          <h2 class="space-need">A Walk In The Nature <em>Contest</em></h2>
+          <h2 class="space-need"><?=$data['contest_name']?> <em>Contest</em></h2>
           <h6>Contest Deadline</h6>
           <div class="main-content">
             <div class="counter">
@@ -46,7 +53,7 @@
               </div>
               <div class="col-lg-8">
                 <ul>
-                  <li><i class="fa fa-medal"></i> <span>Award:</span> $2,400</li>
+                  <li><i class="fa fa-medal"></i> <span>Award:</span> $<?=$data['contest_prize']?></li>
                   <li><span>Time left:</span> 7 Days</li>
                   <li><span>Participants:</span> 118</li>
                   <li><span>Submittions:</span> 280</li>
@@ -58,13 +65,7 @@
         <div class="col-lg-12">
           <div class="main-content">
             <h4>Requirements Of The Contest</h4>
-            <h6>Picture Should Have</h6>
-            <p>SnapX Photography is a professional website template with 5 different HTML pages for maximum customizations. This is based on Bootstrap v5.1.3 CSS framework. Please visit TemplateMo website to see more CSS templates.</p>
-            <p>You are allowed to 100% freely use this SnapX Template for your commercial websites. You are not allowed to redistribute the template ZIP file on any other Free CSS Template collection websites.</p>
-            <h6 class="second-title">Picture Should Not Have</h6>
-            <p>We hope this template is very useful for your website development. If you wish to <a rel="nofollow" href="https://templatemo.com/contact" target="_blank">support TemplateMo</a>, you may make a small amount of donation via PayPal.</p>
-            <p>If you need the PSD source files of this template, please feel free to contact TemplateMo. Our supporters are welcome.</p>
-            <h4 class="second-title">Links To Inspire Your Photo</h4>
+            <p><?=$data['contest_details']?></p>
             <div class="row">
               <div class="col-lg-3 col-6">
                 <div class="item">
